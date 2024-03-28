@@ -1,7 +1,6 @@
 from sentence_transformers import SentenceTransformer
 from pinecone import Pinecone
 from themoviedb import TMDb
-import pandas as pd
 from flask import Flask, request, jsonify, render_template
 import os
 import dotenv
