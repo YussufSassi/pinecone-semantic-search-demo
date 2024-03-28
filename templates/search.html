@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>search</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <center>
+      <form id="search-form">
+        <input type="text" name="" id="search-field" required />
+        <button type="submit" id="submit-button">Search</button>
+      </form>
+    </center>
+    <ol id="search-results"></ol>
+    <script>
+      $(document).ready(function () {
+        $("#search-form").submit(function (e) {
+          e.preventDefault();
+          const searchField = $("#search-field").val();
+          $.ajax({
+            url: "/search",
+            type: "GET",
+            data: {
+              q: searchField,
+            },
+            success: function (response) {
+              $("#search-results").empty();
+              response.results.matches.forEach((result) => {
+                $("#search-results").append(
+                  `<li><div>
+                        <h3>${result.metadata.title} (${result.metadata.release_year})</h3><small><a href="https://www.themoviedb.org/movie/${result.id}" rel="norefferer" target="_blank">tmdb</a></small>
+                        <p>${result.metadata.overview}</p>
+                    </div></li>`
+                );
+              });
+            },
+            error: function (error) {
+              console.log(error);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
