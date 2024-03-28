@@ -13,7 +13,7 @@ This project is a simple movie search engine built with Flask, Pinecone, and Sen
 2. Install the required Python packages:
    `pip3 install flask pinecone-io sentence-transformers python-dotenv`
 3. Copy the .env.example file to .env and fill in your Pinecone API key and TMDB API key.
-4. Run the Flask app: `python3 main.py`
+4. Run the Flask app: `python3 query.py`
 
 ## Usage
 
